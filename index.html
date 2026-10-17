@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ListCraft AI — Generate optimized product listings for Etsy, eBay, and Amazon using open-source AI. Runs locally with Ollama. Your data never leaves your laptop.">
+  <meta name="keywords" content="AI listing generator, Etsy listing writer, eBay listing tool, Amazon product listing, open source AI, Ollama, local AI">
+  <meta name="author" content="ListCraft AI">
+  <title>ListCraft AI — AI-Powered Product Listing Generator</title>
+
+  <!-- Favicon (custom brand mark SVG) -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cdefs%3E%3ClinearGradient id='b' x1='0' y1='0' x2='48' y2='48'%3E%3Cstop offset='0%25' stop-color='%231e1b4b'/%3E%3Cstop offset='100%25' stop-color='%230f172a'/%3E%3C/linearGradient%3E%3ClinearGradient id='r' x1='0' y1='0' x2='48' y2='48'%3E%3Cstop offset='0%25' stop-color='%2338bdf8'/%3E%3Cstop offset='50%25' stop-color='%23818cf8'/%3E%3Cstop offset='100%25' stop-color='%23f59e0b'/%3E%3C/linearGradient%3E%3ClinearGradient id='f1' x1='8' y1='12' x2='24' y2='36'%3E%3Cstop offset='0%25' stop-color='%2338bdf8'/%3E%3Cstop offset='100%25' stop-color='%232563eb'/%3E%3C/linearGradient%3E%3ClinearGradient id='f2' x1='40' y1='12' x2='24' y2='36'%3E%3Cstop offset='0%25' stop-color='%23c084fc'/%3E%3Cstop offset='100%25' stop-color='%237c3aed'/%3E%3C/linearGradient%3E%3ClinearGradient id='s' x1='20' y1='16' x2='28' y2='32'%3E%3Cstop offset='0%25' stop-color='%23ffffff'/%3E%3Cstop offset='100%25' stop-color='%23f59e0b'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect x='2' y='2' width='44' height='44' rx='13' fill='url(%23b)' stroke='url(%23r)' stroke-width='1.5'/%3E%3Cpath d='M24 9L10 17.5V30.5L24 39V24L24 9Z' fill='url(%23f1)'/%3E%3Cpath d='M24 9L38 17.5V30.5L24 39V24L24 9Z' fill='url(%23f2)'/%3E%3Cpath d='M24 9L32 15.5L24 22L16 15.5L24 9Z' fill='%23bae6fd'/%3E%3Cpath d='M24 14C24 19 21.5 21.5 17 24C21.5 26.5 24 29 24 34C24 29 26.5 26.5 31 24C26.5 21.5 24 19 24 14Z' fill='url(%23s)'/%3E%3C/svg%3E">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- ==================== BACKGROUND ELEMENTS ==================== -->
+  <div class="bg-elements-container" aria-hidden="true">
+    <!-- Top Horizon Spotlight Glow -->
+    <div class="bg-spotlight"></div>
+
+    <!-- Animated Aurora Mesh Gradient Orbs -->
+    <div class="bg-orb bg-orb-1"></div>
+    <div class="bg-orb bg-orb-2"></div>
+    <div class="bg-orb bg-orb-3"></div>
+    <div class="bg-orb bg-orb-4"></div>
+
+    <!-- Cybernetic Perspective Grid & Dot Matrix -->
+    <div class="bg-grid-pattern"></div>
+    <div class="bg-dots-pattern"></div>
+
+    <!-- Floating Ambient Marketplace & AI Glass Badges -->
+    <div class="bg-float-elem float-badge-1">
+      <span class="float-icon">✨</span>
+      <span class="float-text">SEO Optimized</span>
+    </div>
+
+    <div class="bg-float-elem float-badge-2">
+      <span class="float-icon">🏷️</span>
+      <span class="float-text">Multi-Platform Ready</span>
+      <div class="float-chips">
+        <span class="f-chip etsy">Etsy</span>
+        <span class="f-chip ebay">eBay</span>
+        <span class="f-chip amz">Amazon</span>
+      </div>
+    </div>
+
+    <div class="bg-float-elem float-badge-3">
+      <span class="float-dot-pulse"></span>
+      <span class="float-icon">🔒</span>
+      <span class="float-text">100% Private & Local</span>
+    </div>
+
+    <div class="bg-float-elem float-badge-4">
+      <span class="float-icon">💎</span>
+      <span class="float-text">High-Conversion Copy</span>
+    </div>
+
+    <!-- Isometric Geometric Shapes & Twinkling Accents -->
+    <div class="bg-geom-shape shape-cube-1">
+      <div class="isometric-cube">
+        <div class="cube-face cube-top"></div>
+        <div class="cube-face cube-left"></div>
+        <div class="cube-face cube-right"></div>
+      </div>
+    </div>
+
+    <div class="bg-geom-shape shape-cube-2">
+      <div class="isometric-cube small">
+        <div class="cube-face cube-top"></div>
+        <div class="cube-face cube-left"></div>
+        <div class="cube-face cube-right"></div>
+      </div>
+    </div>
+
+    <div class="bg-geom-shape shape-star-1">✦</div>
+    <div class="bg-geom-shape shape-star-2">✦</div>
+    <div class="bg-geom-shape shape-star-3">✧</div>
+    <div class="bg-geom-shape shape-ring-1"></div>
+    <div class="bg-geom-shape shape-ring-2"></div>
+
+    <!-- Interactive Ambient Particles Canvas -->
+    <canvas id="bgParticlesCanvas" class="bg-particles-canvas"></canvas>
+  </div>
+
+  <div class="app-wrapper">
+    <!-- ==================== HEADER ==================== -->
+    <header class="app-header" id="appHeader">
+      <div class="app-brand">
+        <div class="app-logo" title="ListCraft AI">
+          <svg class="brand-logo-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="ListCraft AI Logo">
+            <defs>
+              <linearGradient id="lc-base-grad" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#1e1b4b"/>
+                <stop offset="50%" stop-color="#0f172a"/>
+                <stop offset="100%" stop-color="#020617"/>
+              </linearGradient>
+              <linearGradient id="lc-rim-grad" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#38bdf8"/>
+                <stop offset="40%" stop-color="#818cf8"/>
+                <stop offset="75%" stop-color="#c084fc"/>
+                <stop offset="100%" stop-color="#f59e0b"/>
+              </linearGradient>
+              <linearGradient id="lc-left-facet" x1="8" y1="12" x2="24" y2="36" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#38bdf8"/>
+                <stop offset="100%" stop-color="#2563eb"/>
+              </linearGradient>
+              <linearGradient id="lc-right-facet" x1="40" y1="12" x2="24" y2="36" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#d8b4fe"/>
+                <stop offset="100%" stop-color="#7c3aed"/>
+              </linearGradient>
+              <linearGradient id="lc-top-facet" x1="24" y1="8" x2="24" y2="22" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#bae6fd"/>
+                <stop offset="100%" stop-color="#6366f1"/>
+              </linearGradient>
+              <radialGradient id="lc-core-glow" cx="24" cy="24" r="13" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+                <stop offset="40%" stop-color="#fef08a" stop-opacity="0.65"/>
+                <stop offset="75%" stop-color="#f59e0b" stop-opacity="0.25"/>
+                <stop offset="100%" stop-color="#f59e0b" stop-opacity="0"/>
+              </radialGradient>
+              <linearGradient id="lc-sparkle-grad" x1="20" y1="16" x2="28" y2="32" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#ffffff"/>
+                <stop offset="40%" stop-color="#fef08a"/>
+                <stop offset="100%" stop-color="#f59e0b"/>
+              </linearGradient>
+              <filter id="lc-glow-filter" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur stdDeviation="1.5" result="blur"/>
+                <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+              </filter>
+            </defs>
+
+            <!-- Base Squircle with Glowing Perimeter Rim -->
+            <rect x="2" y="2" width="44" height="44" rx="13" fill="url(#lc-base-grad)" stroke="url(#lc-rim-grad)" stroke-width="1.5"/>
+
+            <!-- Subtle Precision Coordinate Lines -->
+            <path d="M12 24H36M24 12V36" stroke="rgba(255,255,255,0.08)" stroke-width="0.8" stroke-dasharray="2 2"/>
+
+            <!-- Facet Wings (Crafted Prism & Tag Silhouette) -->
+            <path d="M24 9L10 17.5V30.5L24 39V24L24 9Z" fill="url(#lc-left-facet)" fill-opacity="0.9"/>
+            <path d="M24 24L10 30.5L24 39Z" fill="#1e3a8a" fill-opacity="0.5"/>
+
+            <path d="M24 9L38 17.5V30.5L24 39V24L24 9Z" fill="url(#lc-right-facet)" fill-opacity="0.9"/>
+            <path d="M24 24L38 30.5L24 39Z" fill="#581c87" fill-opacity="0.5"/>
+
+            <!-- Top Facet Crest -->
+            <path d="M24 9L32 15.5L24 22L16 15.5L24 9Z" fill="url(#lc-top-facet)" fill-opacity="0.95"/>
+
+            <!-- Central AI Luminous Star & Aura -->
+            <circle cx="24" cy="24" r="9" fill="url(#lc-core-glow)"/>
+            <path class="logo-sparkle" d="M24 14C24 19 21.5 21.5 17 24C21.5 26.5 24 29 24 34C24 29 26.5 26.5 31 24C26.5 21.5 24 19 24 14Z" fill="url(#lc-sparkle-grad)" filter="url(#lc-glow-filter)"/>
+            
+            <!-- Secondary Micro Sparkle -->
+            <path class="logo-sparkle-mini" d="M33 11C33 12.8 32.2 13.6 30.5 14.5C32.2 15.4 33 16.2 33 18C33 16.2 33.8 15.4 35.5 14.5C33.8 13.6 33 12.8 33 11Z" fill="#ffffff" opacity="0.95"/>
+            <circle cx="14" cy="33" r="1.2" fill="#38bdf8" opacity="0.85"/>
+          </svg>
+        </div>
+        <div>
+          <div class="app-title-wrapper">
+            <h1 class="app-title">ListCraft <span class="app-title-gradient">AI</span></h1>
+            <span class="brand-version-badge"><span class="badge-dot"></span>Open Source</span>
+          </div>
+          <p class="app-tagline">AI-powered listings that sell — powered by open-source models</p>
+        </div>
+      </div>
+      <div class="header-controls">
+        <div class="model-selector-wrap">
+          <label for="modelSelect">Model:</label>
+          <select id="modelSelect" class="model-select">
+            <option value="">Detecting models...</option>
+          </select>
+        </div>
+        <div class="connection-status" id="connectionStatus">
+          <span class="connection-dot"></span>
+          <span class="status-text">Checking...</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- ==================== SETUP INSTRUCTIONS ==================== -->
+    <div class="setup-instructions" id="setupInstructions" style="display:none;">
+      <h3>⚠️ Ollama Not Detected</h3>
+      <p style="color: var(--text-secondary); margin-bottom: var(--space-md); font-size: 0.88rem;">
+        ListCraft AI needs <strong>Ollama</strong> running locally to generate listings. Your data never leaves your machine.
+      </p>
+      <ol>
+        <li>Download & install Ollama from <a href="https://ollama.com" target="_blank" rel="noopener">ollama.com</a></li>
+        <li>Open a terminal and pull a model: <code>ollama pull llama3.1</code></li>
+        <li>Start Ollama: <code>ollama serve</code></li>
+        <li>Refresh this page — the status badge should turn green</li>
+      </ol>
+    </div>
+
+    <!-- ==================== MAIN CONTENT ==================== -->
+    <main class="main-grid">
+
+      <!-- ---------- INPUT PANEL ---------- -->
+      <aside class="glass-card input-panel" id="inputPanel">
+        <div class="panel-header">
+          <div class="panel-icon">📝</div>
+          <div>
+            <div class="panel-title">Product Details</div>
+            <div class="panel-subtitle">Tell us about your product</div>
+          </div>
+        </div>
+
+        <form id="listingForm" onsubmit="return false;">
+          <!-- Product Name -->
+          <div class="form-group">
+            <label class="form-label" for="productName">
+              Product Name <span class="required">*</span>
+            </label>
+            <input
+              type="text"
+              id="productName"
+              class="form-input"
+              placeholder="e.g. Handmade Leather Journal"
+              autocomplete="off"
+            >
+          </div>
+
+          <!-- Category -->
+          <div class="form-group">
+            <label class="form-label" for="category">Category</label>
+            <input
+              type="text"
+              id="category"
+              class="form-input"
+              placeholder="e.g. Stationery, Home Decor, Jewelry"
+              autocomplete="off"
+            >
+          </div>
+
+          <!-- Key Features -->
+          <div class="form-group">
+            <label class="form-label" for="features">
+              Key Features & Materials <span class="required">*</span>
+            </label>
+            <textarea
+              id="features"
+              class="form-textarea"
+              placeholder="Describe materials, dimensions, colors, what makes it special...&#10;&#10;e.g. Genuine Italian leather, hand-stitched binding, 200 unlined pages, A5 size, comes in saddle brown and midnight black"
+            ></textarea>
+          </div>
+
+          <!-- Price Range & Condition (inline) -->
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="priceRange">Price Range</label>
+              <select id="priceRange" class="form-select">
+                <option value="">Select...</option>
+                <option value="Under $25">Under $25</option>
+                <option value="$25 - $50">$25 - $50</option>
+                <option value="$50 - $100">$50 - $100</option>
+                <option value="$100 - $250">$100 - $250</option>
+                <option value="$250+">$250+</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="condition">Condition</label>
+              <select id="condition" class="form-select">
+                <option value="New">New</option>
+                <option value="Handmade">Handmade</option>
+                <option value="Vintage">Vintage</option>
+                <option value="Refurbished">Refurbished</option>
+                <option value="Used - Like New">Used - Like New</option>
+                <option value="Used - Good">Used - Good</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Tone -->
+          <div class="form-group">
+            <label class="form-label">Writing Tone</label>
+            <div class="tone-chips">
+              <button type="button" class="tone-chip active" data-tone="Professional">Professional</button>
+              <button type="button" class="tone-chip" data-tone="Casual">Casual</button>
+              <button type="button" class="tone-chip" data-tone="Luxurious">Luxurious</button>
+              <button type="button" class="tone-chip" data-tone="Playful">Playful</button>
+              <button type="button" class="tone-chip" data-tone="Minimalist">Minimalist</button>
+            </div>
+          </div>
+
+          <!-- Extra Notes -->
+          <div class="form-group">
+            <label class="form-label" for="extraNotes">Additional Notes</label>
+            <textarea
+              id="extraNotes"
+              class="form-textarea"
+              placeholder="Target audience, unique selling points, seasonal relevance..."
+              style="min-height: 60px;"
+            ></textarea>
+          </div>
+
+          <!-- Platform Tabs -->
+          <div class="form-group">
+            <label class="form-label">Target Platform</label>
+            <div class="platform-tabs">
+              <button type="button" class="platform-tab active" data-platform="etsy">
+                <span class="tab-icon">🧶</span> Etsy
+              </button>
+              <button type="button" class="platform-tab" data-platform="ebay">
+                <span class="tab-icon">🏷️</span> eBay
+              </button>
+              <button type="button" class="platform-tab" data-platform="amazon">
+                <span class="tab-icon">📦</span> Amazon
+              </button>
+            </div>
+          </div>
+
+          <!-- Generate Button -->
+          <button type="button" id="generateBtn" class="btn-generate">
+            <span class="btn-icon">✨</span>
+            <span class="btn-text">Generate Listing</span>
+          </button>
+        </form>
+      </aside>
+
+      <!-- ---------- OUTPUT PANEL ---------- -->
+      <section class="glass-card output-panel" id="outputPanel">
+        <div class="panel-header">
+          <div class="panel-icon" style="background: var(--gradient-gold);">🚀</div>
+          <div>
+            <div class="panel-title">Generated Listing</div>
+            <div class="panel-subtitle">AI-crafted, ready to publish</div>
+          </div>
+        </div>
+
+        <div id="outputContainer">
+          <!-- Empty state -->
+          <div class="output-empty">
+            <div class="empty-icon">✨</div>
+            <div class="empty-title">Ready to craft your listing</div>
+            <div class="empty-desc">
+              Fill in your product details, choose a platform, and hit Generate.
+              Your AI-powered listing will appear here in seconds.
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="app-footer">
+      <div class="footer-badges">
+        <span class="footer-badge">🔒 100% Local</span>
+        <span class="footer-badge">🤖 Open-Source AI</span>
+        <span class="footer-badge">💰 Zero API Costs</span>
+      </div>
+      <p class="footer-text">
+        Powered by <a href="https://ollama.com" target="_blank" rel="noopener">Ollama</a> &
+        open-weight models · Built for
+        <a href="https://hacktoberfest.com" target="_blank" rel="noopener">Hacktoberfest 2026</a>
+        · <a href="https://github.com" target="_blank" rel="noopener">Star on GitHub</a>
+      </p>
+    </footer>
+  </div>
+
+  <!-- ==================== HISTORY PANEL ==================== -->
+  <div class="history-overlay" id="historyOverlay"></div>
+  <div class="history-panel" id="historyPanel">
+    <div class="history-panel-header">
+      <h3>📋 History</h3>
+      <button class="btn-close-history" id="historyClose" title="Close history">✕</button>
+    </div>
+    <div class="history-list" id="historyList"></div>
+  </div>
+
+  <!-- History Toggle Button -->
+  <button class="history-toggle" id="historyToggle" title="View listing history">📋</button>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Scripts -->
+  <script src="js/ollama.js"></script>
+  <script src="js/templates.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
