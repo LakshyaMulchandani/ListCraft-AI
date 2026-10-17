@@ -8,13 +8,13 @@
 
 /* ---------- CSS Custom Properties ---------- */
 :root {
-  /* Background */
-  --bg-primary: #060a14;
-  --bg-secondary: #0c1222;
-  --bg-card: rgba(15, 23, 42, 0.65);
-  --bg-card-hover: rgba(20, 30, 55, 0.75);
-  --bg-input: rgba(15, 23, 42, 0.5);
-  --bg-input-focus: rgba(20, 30, 55, 0.7);
+  /* Background - Rich Cosmic Midnight Palette */
+  --bg-primary: #070913;
+  --bg-secondary: #0d1224;
+  --bg-card: rgba(13, 19, 36, 0.7);
+  --bg-card-hover: rgba(18, 27, 50, 0.8);
+  --bg-input: rgba(10, 15, 30, 0.55);
+  --bg-input-focus: rgba(16, 24, 46, 0.75);
 
   /* Glass */
   --glass-border: rgba(255, 255, 255, 0.06);
@@ -91,7 +91,13 @@ html {
 
 body {
   font-family: var(--font-family);
-  background: var(--bg-primary);
+  background-color: var(--bg-primary);
+  background-image:
+    radial-gradient(circle at 14% 16%, rgba(67, 56, 202, 0.24) 0%, transparent 45%),
+    radial-gradient(circle at 86% 22%, rgba(124, 58, 237, 0.2) 0%, transparent 42%),
+    radial-gradient(circle at 50% 88%, rgba(14, 116, 144, 0.16) 0%, transparent 52%),
+    radial-gradient(circle at 82% 82%, rgba(217, 119, 6, 0.1) 0%, transparent 42%);
+  background-attachment: fixed;
   color: var(--text-primary);
   min-height: 100vh;
   overflow-x: hidden;
@@ -265,24 +271,129 @@ body::before {
   transition: opacity 0.3s ease;
 }
 
-.float-badge-1 {
-  top: 90px;
-  left: 2.5%;
-  animation: floatElem1 8s ease-in-out infinite alternate;
-  border-color: rgba(59, 130, 246, 0.3);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 20px rgba(59, 130, 246, 0.15);
+/* Floating Product Showcase Cards (Imagery) */
+.bg-float-card {
+  position: absolute;
+  width: 142px;
+  background: rgba(14, 20, 38, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-md);
+  padding: 8px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.55), 0 0 24px rgba(99, 102, 241, 0.12);
+  user-select: none;
+  pointer-events: none;
+  overflow: hidden;
+  transition: transform var(--transition-base), opacity var(--transition-base);
+  opacity: 0.88;
+}
+
+.float-card-img-wrap {
+  position: relative;
+  width: 100%;
+  height: 90px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #020617;
+}
+
+.float-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: saturate(1.1) brightness(0.96);
+}
+
+.float-card-badge {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  font-size: 0.58rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(10, 15, 30, 0.82);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: #fbbf24;
+  border: 1px solid rgba(251, 191, 36, 0.35);
+  letter-spacing: 0.02em;
+}
+
+.float-card-body {
+  padding-top: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.float-card-title {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.float-card-meta {
+  font-size: 0.62rem;
+  color: #38bdf8;
+  font-weight: 500;
+}
+
+/* Card Placements and Float Animations */
+.float-card-1 {
+  top: 80px;
+  left: 2%;
+  animation: floatCard1 11s ease-in-out infinite alternate;
+  border-color: rgba(245, 158, 11, 0.28);
+}
+
+.float-card-2 {
+  top: 95px;
+  right: 2%;
+  animation: floatCard2 13s ease-in-out infinite alternate;
+  border-color: rgba(59, 130, 246, 0.28);
+}
+
+.float-card-3 {
+  bottom: 80px;
+  left: 2%;
+  animation: floatCard3 12s ease-in-out infinite alternate;
+  border-color: rgba(168, 85, 247, 0.28);
+}
+
+@keyframes floatCard1 {
+  0% { transform: translateY(0px) rotate(-2deg); }
+  50% { transform: translateY(-16px) rotate(-0.5deg) scale(1.02); }
+  100% { transform: translateY(8px) rotate(-3deg); }
+}
+
+@keyframes floatCard2 {
+  0% { transform: translateY(0px) rotate(2.5deg); }
+  50% { transform: translateY(-18px) rotate(1deg) scale(1.02); }
+  100% { transform: translateY(10px) rotate(3deg); }
+}
+
+@keyframes floatCard3 {
+  0% { transform: translateY(0px) rotate(-1.5deg); }
+  50% { transform: translateY(14px) rotate(1deg) scale(1.02); }
+  100% { transform: translateY(-10px) rotate(-2deg); }
 }
 
 .float-badge-2 {
-  top: 130px;
-  right: 2.5%;
+  top: 255px;
+  right: 2%;
   animation: floatElem2 10s ease-in-out infinite alternate;
   border-color: rgba(139, 92, 246, 0.3);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 20px rgba(139, 92, 246, 0.15);
 }
 
 .float-badge-3 {
-  bottom: 120px;
+  bottom: 235px;
   left: 2%;
   animation: floatElem3 9s ease-in-out infinite alternate;
   border-color: rgba(16, 185, 129, 0.3);
@@ -1503,14 +1614,23 @@ body::before {
 }
 
 /* ---------- Responsive ---------- */
-@media (max-width: 1280px) {
-  .bg-float-elem {
-    opacity: 0.35;
+@media (max-width: 1400px) {
+  .bg-float-card {
+    opacity: 0.6;
     transform: scale(0.88);
   }
 }
 
+@media (max-width: 1280px) {
+  .bg-float-card,
+  .bg-float-elem {
+    opacity: 0.35;
+    transform: scale(0.82);
+  }
+}
+
 @media (max-width: 1024px) {
+  .bg-float-card,
   .bg-float-elem,
   .bg-geom-shape {
     display: none;
@@ -1538,6 +1658,7 @@ body::before {
 
 @media (prefers-reduced-motion: reduce) {
   .bg-orb,
+  .bg-float-card,
   .bg-float-elem,
   .bg-geom-shape,
   .bg-spotlight,
